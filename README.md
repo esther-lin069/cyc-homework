@@ -10,4 +10,5 @@ include:index, work, 3-work-single page, about and contact
 
 
 all images are Creative Commons or from free stock
+
 -Esther
