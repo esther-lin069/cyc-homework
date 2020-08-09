@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-08-09 12:04:29
+-- 產生時間： 2020-08-09 14:40:00
 -- 伺服器版本： 10.4.13-MariaDB
 -- PHP 版本： 7.2.32
 
@@ -11,10 +11,16 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- 資料庫： `esther/cy-order-food_system`
 --
-CREATE DATABASE IF NOT EXISTS `esther/cy-order-food_system` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `esther/cy-order-food_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `esther/cy-order-food_system`;
 
 -- --------------------------------------------------------
@@ -22,18 +28,11 @@ USE `esther/cy-order-food_system`;
 --
 -- 資料表結構 `category`
 --
--- 建立時間： 2020-08-09 05:59:52
--- 最後更新： 2020-08-09 07:52:01
---
 
 CREATE TABLE `category` (
   `categoryID` int(3) NOT NULL,
-  `categoryName` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 資料表的關聯 `category`:
---
+  `categoryName` varchar(10) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `category`
@@ -51,23 +50,16 @@ INSERT INTO `category` (`categoryID`, `categoryName`) VALUES
 --
 -- 資料表結構 `employee`
 --
--- 建立時間： 2020-08-09 07:30:58
--- 最後更新： 2020-08-09 07:49:53
---
 
 CREATE TABLE `employee` (
   `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `lastName` varchar(10) NOT NULL,
-  `firstName` varchar(15) NOT NULL,
-  `gender` enum('M','F') NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 資料表的關聯 `employee`:
---
+  `lastName` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `firstName` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `gender` enum('M','F') COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `employee`
@@ -90,23 +82,12 @@ INSERT INTO `employee` (`employeeID`, `lastName`, `firstName`, `gender`, `phone`
 --
 -- 資料表結構 `favorites`
 --
--- 建立時間： 2020-08-09 05:59:26
--- 最後更新： 2020-08-09 10:02:46
---
 
 CREATE TABLE `favorites` (
   `favoritesID` int(5) NOT NULL,
   `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `itemID` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 資料表的關聯 `favorites`:
---   `employeeID`
---       `employee` -> `employeeID`
---   `itemID`
---       `item` -> `itemID`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `favorites`
@@ -121,26 +102,16 @@ INSERT INTO `favorites` (`favoritesID`, `employeeID`, `itemID`) VALUES
 --
 -- 資料表結構 `item`
 --
--- 建立時間： 2020-08-09 05:48:04
---
 
 CREATE TABLE `item` (
   `itemID` int(10) NOT NULL,
   `supplierID` int(5) NOT NULL,
   `categoryID` int(3) NOT NULL,
-  `itemName` varchar(20) NOT NULL,
-  `itemDesc` varchar(300) DEFAULT NULL,
-  `itemImg` varchar(300) DEFAULT NULL,
+  `itemName` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `itemDesc` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `itemImg` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 資料表的關聯 `item`:
---   `categoryID`
---       `category` -> `categoryID`
---   `supplierID`
---       `supplier` -> `supplierID`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `item`
@@ -165,20 +136,13 @@ INSERT INTO `item` (`itemID`, `supplierID`, `categoryID`, `itemName`, `itemDesc`
 --
 -- 資料表結構 `location`
 --
--- 建立時間： 2020-08-09 05:58:30
--- 最後更新： 2020-08-09 08:53:51
---
 
 CREATE TABLE `location` (
   `locationID` int(5) NOT NULL,
-  `building` enum('BHW','industry_building') NOT NULL,
-  `office` varchar(5) NOT NULL,
+  `building` enum('BHW','industry_building') COLLATE utf8_unicode_ci NOT NULL,
+  `office` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `floor` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 資料表的關聯 `location`:
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `location`
@@ -195,36 +159,23 @@ INSERT INTO `location` (`locationID`, `building`, `office`, `floor`) VALUES
 --
 -- 資料表結構 `orders`
 --
--- 建立時間： 2020-08-09 09:12:31
--- 最後更新： 2020-08-09 09:52:10
---
 
 CREATE TABLE `orders` (
   `orderID` int(10) NOT NULL,
   `employeeID` int(10) UNSIGNED ZEROFILL NOT NULL,
   `locationID` int(5) NOT NULL,
   `orderDate` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 資料表的關聯 `orders`:
---   `employeeID`
---       `employee` -> `employeeID`
---   `employeeID`
---       `employee` -> `employeeID`
---   `locationID`
---       `location` -> `locationID`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `orders`
 --
 
 INSERT INTO `orders` (`orderID`, `employeeID`, `locationID`, `orderDate`) VALUES
-(1, 2012020154, 3, '2020-08-09 09:49:03'),
-(2, 2011561040, 3, '2020-08-09 09:49:34'),
-(3, 2009080063, 2, '2020-07-08 09:49:50'),
-(4, 2010961327, 1, '2020-08-04 09:50:07'),
+(1, 2012020154, 3, '2020-08-04 09:49:03'),
+(2, 2011561040, 3, '2020-08-04 09:49:34'),
+(3, 2009080063, 2, '2020-08-07 09:49:50'),
+(4, 2010961327, 1, '2020-08-07 09:50:07'),
 (5, 2015040023, 4, '2020-08-09 09:51:05');
 
 -- --------------------------------------------------------
@@ -232,22 +183,13 @@ INSERT INTO `orders` (`orderID`, `employeeID`, `locationID`, `orderDate`) VALUES
 --
 -- 資料表結構 `order_detail`
 --
--- 建立時間： 2020-08-09 10:01:29
--- 最後更新： 2020-08-09 09:59:47
---
 
 CREATE TABLE `order_detail` (
   `order_detailID` int(10) NOT NULL,
   `orderID` int(10) NOT NULL,
   `itemID` int(10) NOT NULL,
   `quantity` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 資料表的關聯 `order_detail`:
---   `itemID`
---       `item` -> `itemID`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `order_detail`
@@ -266,22 +208,15 @@ INSERT INTO `order_detail` (`order_detailID`, `orderID`, `itemID`, `quantity`) V
 --
 -- 資料表結構 `supplier`
 --
--- 建立時間： 2020-08-09 08:06:03
--- 最後更新： 2020-08-09 08:39:36
---
 
 CREATE TABLE `supplier` (
   `supplierID` int(5) NOT NULL,
-  `supplierName` varchar(30) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `region` varchar(10) NOT NULL,
-  `address` varchar(60) NOT NULL,
-  `website` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 資料表的關聯 `supplier`:
---
+  `supplierName` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `region` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- 傾印資料表的資料 `supplier`
@@ -432,3 +367,7 @@ ALTER TABLE `orders`
 ALTER TABLE `order_detail`
   ADD CONSTRAINT `fk_item_orderdetail` FOREIGN KEY (`itemID`) REFERENCES `item` (`itemID`) ON UPDATE CASCADE;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
