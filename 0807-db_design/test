@@ -1,0 +1,13 @@
+SELECT o.orderID, firstName AS '訂購人', itemName as '品項',quantity AS '數量',price as '單價', supplierName AS '商家',orderDate AS '訂購時間'
+FROM orders o JOIN order_detail od ON o.orderID = od.orderID
+			    JOIN employee e ON e.employeeID = o.employeeID
+				JOIN item i ON od.itemID = i.itemID
+				JOIN supplier s ON s.supplierID = i.supplierID
+
+
+SELECT o.orderID, firstName AS '訂購人',SUM(price*quantity) as '總價',CONCAT(floor, office ) AS '地點',orderDate AS '訂購時間'
+FROM orders o JOIN order_detail od ON o.orderID = od.orderID
+							  JOIN employee e ON e.employeeID = o.employeeID
+							  JOIN item i ON od.itemID = i.itemID
+							  JOIN location l ON l.locationID = o.locationID
+                              GROUP BY firstName
