@@ -11,3 +11,7 @@ FROM orders o JOIN order_detail od ON o.orderID = od.orderID
 							  JOIN item i ON od.itemID = i.itemID
 							  JOIN location l ON l.locationID = o.locationID
                               GROUP BY firstName
+
+
+SELECT (SELECT supplierName FROM supplier  WHERE supplierID = o.supplierID) AS supplier ,categoryName , itemName, itemDesc, price FROM `item` AS o 
+JOIN category c ON c.categoryID = o.categoryID ORDER BY supplier
