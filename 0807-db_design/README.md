@@ -3,9 +3,9 @@
 
 2020/8/7 cyc-homework :
 sql-database: 中佑訂便當系統資料庫設計規劃
-
-content: create-db.txt ,sql_test.txt ,esther_cy-order-food_system.sql
 ---
+content: create-db.txt ,sql_test.txt ,esther_cy-order-food_system.sql
+
 
 -create-db.txt :建立資料庫與資料表及關聯
 
@@ -16,4 +16,5 @@ content: create-db.txt ,sql_test.txt ,esther_cy-order-food_system.sql
 !note :自己使用xampp shell會有亂碼問題，但在phpmyadmin中沒有
 
 ~
+
 -Esther
