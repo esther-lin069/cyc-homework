@@ -1,0 +1,25 @@
+//訂單細節
+SELECT o.orderID, firstName AS '訂購人', itemName as '品項',quantity AS '數量',price as '單價', supplierName AS '商家',s.phone AS '商家電話',orderDate AS '訂購時間'
+FROM orders o JOIN order_detail od ON o.orderID = od.orderID
+			    JOIN employee e ON e.employeeID = o.employeeID
+				JOIN item i ON od.itemID = i.itemID
+				JOIN supplier s ON s.supplierID = i.supplierID
+				JOIN location l ON l.locationID = o.locationID
+					GROUP BY firstName
+
+//訂購人的地點與總價
+SELECT o.orderID, firstName AS '訂購人',SUM(price*quantity) as '總價',CONCAT(floor, office ) AS '地點',orderDate AS '訂購時間'
+FROM orders o JOIN order_detail od ON o.orderID = od.orderID
+				JOIN employee e ON e.employeeID = o.employeeID
+				JOIN item i ON od.itemID = i.itemID
+				JOIN location l ON l.locationID = o.locationID
+                    GROUP BY firstName
+
+//列出所有品項的細節
+SELECT (SELECT supplierName FROM supplier  WHERE supplierID = o.supplierID) AS supplier ,categoryName , itemName, itemDesc, price FROM `item` AS o 
+JOIN category c ON c.categoryID = o.categoryID ORDER BY supplier
+
+//2號供應商接到的訂單
+SELECT o.orderID, itemID, quantity locationID, orderDate
+FROM orders o JOIN order_detail od ON o.orderID = od.orderID 
+WHERE itemID IN (SELECT itemID FROM item WHERE supplierID = 2)

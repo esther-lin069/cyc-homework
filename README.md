@@ -1,7 +1,7 @@
 # Cyc-HomeWork
 #week01
 
-2020/7/29 cyc-homework
+2020/7/29 cyc-homework:
 boostrap practice
 
 topic:parrot
