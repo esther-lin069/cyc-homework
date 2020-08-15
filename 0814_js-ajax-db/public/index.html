@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery.toast.css">
+    <link rel="shortcut icon" href="#"/>
     <style>
         .modal-header, h4, .close {
             background-color: #5cb85c;
@@ -217,6 +218,17 @@ $(function () {
             $(".panel-body").eq(key).text(content);
             
         })
+
+        $(".deleteItem").click(function(){ //不能用=>因為其this代表全域
+            //var index = $(this).parent().parent().index(); //why not val?
+            var index = $(this).closest("div").parent().index(); //get index
+            console.log(index);
+            $.ajax({
+                type: "delete",
+                url: "/home/news",
+                data: newsList[index]
+            }).then(GetData_Refresh);
+        })
     }
     
     //03. add modal-box （右上角的＋）
@@ -236,16 +248,18 @@ $(function () {
             ymd: $("#ymdTextBox").val(),
             content: $("#contentTextBox").val().trim()
             }
-            console.log(dataToServe);
-            //05. post data
+            console.log(JSON.stringify(dataToServe));
+            //05. post data 有問題還沒解決QQ
             $.ajax({
                 type: "post",
                 url: "/home/news",
                 contentType: "application/json",
                 data: JSON.stringify(dataToServe)
+                
             }).then(function(){
                 GetData_Refresh();
             })
+            
     })
 
 

@@ -68,15 +68,14 @@ app.get("/home/news", function (request, response) {
 app.post("/home/news", function (request, response) {
 
 	connection.query(
-		"insert into news set title = ?, ymd = ?, content = ?", 
+		"insert into news (title, ymd, content) values (?,?,?)", 
 			[
 				request.body.title, 
 				request.body.ymd,
 				request.body.content
-				
+								
 			]);
 	response.send("row inserted.");
-    console.log(request.body.content);
 })
 
 
