@@ -31,7 +31,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title pt">
-                            <a data-toggle="collapse" href="#collapse1">
+                            <a data-toggle="collapse" href="#collapse0">
                                 news1.
                             </a>                        
                             <span class="pull-right">
@@ -44,7 +44,7 @@
                             </span>
                         </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse">
+                    <div id="collapse0" class="panel-collapse collapse">
                         <div class="panel-body">
                             Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
                             cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
@@ -54,78 +54,7 @@
                 </div>
             </div>
             <div id="latestNews" class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title pt">
-                            <a data-toggle="collapse" href="#collapse1">
-                                news1.
-                            </a>                        
-                            <span class="pull-right">
-                                <button class="btn btn-info btn-xs editItem">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                </button>&nbsp;
-                                <button class="btn btn-danger btn-xs deleteItem">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                        </h4>
-                    </div>
-                    <div id="collapse1" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
-                            cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
-                            vice lomo.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title pt">
-                            <a data-toggle="collapse" href="#collapse2">
-                                news2.
-                            </a>                        
-                            <span class="pull-right">
-                                <button class="btn btn-info btn-xs editItem">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                </button>&nbsp;
-                                <button class="btn btn-danger btn-xs deleteItem">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                        </h4>
-                    </div>
-                    <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
-                            cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
-                            vice lomo.
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title pt">
-                            <a data-toggle="collapse" href="#collapse3">
-                                news2.
-                            </a>                        
-                            <span class="pull-right">
-                                <button class="btn btn-info btn-xs editItem">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                </button>&nbsp;
-                                <button class="btn btn-danger btn-xs deleteItem">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button>
-                            </span>
-                        </h4>
-                    </div>
-                    <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
-                            cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
-                            vice lomo.
-                        </div>
-                    </div>
-                </div>
+                <!--items-->
             </div>
         </div>
 
@@ -174,6 +103,17 @@
                                id="ymdTextBox"
                                class="form-control"
                                placeholder="yyyy-mm-dd 例如: 2017-05-20">
+                    </div>
+                    <div class="form-group">
+                        <label for="contentBox">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                            內容
+                            <textarea type="text"
+                               id="contentTextBox"
+                               class="form-control"
+                               rows="5">
+                            </textarea>
+                        </label>
                     </div>
 
 
@@ -238,39 +178,62 @@ function showToast(heading, message) {
 <script>
 
 $(function () {
-    
 
-    function getPanel(index){
-        var $cPanel = $("#ex-panel").eq(0).html();
+    //獲取元素參考並移除該參考元素
+    var CPanel = $("#ex-panel").html();
+    $("#ex-panel").remove();
+
+    function setPanel(index){
+        var $cPanel = CPanel;
         var re = /collapse\d/g;
-        //console.log($cPanel.replace(re,"collapse" + index));
-        return $cPanel.replace(re,"collapse" + index);
+        $("#latestNews").append($cPanel.replace(re,"collapse" + index));
+
     }
 
-    var newsList =
-    [
-        { ymd: "2017-05-01", title: "Item 1", content: "test" },
-        { ymd: "2017-05-01", title: "Item 2", content: "test" },
-        { ymd: "2017-05-02", title: "Item 3", content: "test" },
+    // var newsList =
+    // [
+    //     { ymd: "2017-05-01", title: "Item 1", content: "test1" },
+    //     { ymd: "2017-05-01", title: "Item 2", content: "test2" },
+    //     { ymd: "2017-05-02", title: "Item 3", content: "test3" },
 
-    ];
+    // ];
+
+    //02.從伺服器端獲取資料
+    function GetData_Refresh(){
+        $.ajax({
+        type:"get",
+        url: "/home/news",
+        success: function(e){
+            newsList = JSON.parse(e);
+            //console.log(newsList); {newsId: /title: /ymd: }
+            refreshUI();
+        }
+        })
+    }
+    GetData_Refresh();
 
     function refreshUI(){
         $("#latestNews").empty();
         // 01.印出假資料
         $.each(newsList, function(key, obj){
-            var title = `${obj.ymd}| ${obj.title}`;
+            var title = `${obj.ymd} | ${obj.title}`;
             var content = obj.content;
             
-            var $panelItem = getPanel(key+1);
-            //console.log($panelItem);
-            $("#latestNews").append($panelItem);
-
+            setPanel(key+1);
+            //console.log($("#latestNews").children().eq(key).html());
+            $(".panel-title a").eq(key).text(title);
+            $(".panel-body").eq(key).text(content);
+            
         })
     }
-    refreshUI();
+    
+    //*step3. add modal-box （右上角的＋）
+    $("#newItem").click(function(){
+        currentIndex = -1;
+        $("#newsModal").modal({backdrop:"static"});
+    })
 
-
+    var currentIndex = -1;
 
 
 
