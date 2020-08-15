@@ -1,0 +1,29 @@
+{
+  "name": "0814_js-ajax-db",
+  "version": "1.0.0",
+  "description": "cyc2020-0814-homework",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esther-lin069/cyc-homework.git"
+  },
+  "keywords": [
+    "ajax"
+  ],
+  "author": "esther",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esther-lin069/cyc-homework/issues"
+  },
+  "homepage": "https://github.com/esther-lin069/cyc-homework#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1"
+  }
+}
