@@ -52,3 +52,8 @@
 .bs-callout a.alert-link {
     font-weight: bold;
 }
+
+.pt{
+    background-color: #ffffff;
+    text-align: left;
+}
