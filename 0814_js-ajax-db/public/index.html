@@ -190,14 +190,6 @@ $(function () {
 
     }
 
-    // var newsList =
-    // [
-    //     { ymd: "2017-05-01", title: "Item 1", content: "test1" },
-    //     { ymd: "2017-05-01", title: "Item 2", content: "test2" },
-    //     { ymd: "2017-05-02", title: "Item 3", content: "test3" },
-
-    // ];
-
     //02.從伺服器端獲取資料
     function GetData_Refresh(){
         $.ajax({
@@ -227,7 +219,7 @@ $(function () {
         })
     }
     
-    //*step3. add modal-box （右上角的＋）
+    //03. add modal-box （右上角的＋）
     $("#newItem").click(function(){
         currentIndex = -1;
         $("#newsModal").modal({backdrop:"static"});
@@ -235,7 +227,26 @@ $(function () {
 
     var currentIndex = -1;
 
-
+    //04. OK button
+    $("#okButton").click(function(){
+        $("#newsModal").modal("hide");
+        //new
+        let dataToServe = {
+            title: $("#titleTextBox").val(),
+            ymd: $("#ymdTextBox").val(),
+            content: $("#contentTextBox").val().trim()
+            }
+            console.log(dataToServe);
+            //05. post data
+            $.ajax({
+                type: "post",
+                url: "/home/news",
+                contentType: "application/json",
+                data: JSON.stringify(dataToServe)
+            }).then(function(){
+                GetData_Refresh();
+            })
+    })
 
 
 })  // end of init.
