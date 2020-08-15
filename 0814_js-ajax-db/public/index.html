@@ -198,12 +198,13 @@ $(function () {
         url: "/home/news",
         success: function(e){
             newsList = JSON.parse(e);
-            //console.log(newsList); {newsId: /title: /ymd: }
+            //console.log(newsList);
             refreshUI();
         }
         })
     }
     GetData_Refresh();
+
 
     function refreshUI(){
         $("#latestNews").empty();
@@ -219,8 +220,8 @@ $(function () {
             
         })
 
-        $(".deleteItem").click(function(){ //不能用=>因為其this代表全域
-            //var index = $(this).parent().parent().index(); //why not val?
+        //06.delete data
+        $(".deleteItem").click(function(){ 
             var index = $(this).closest("div").parent().index(); //get index
             console.log(index);
             $.ajax({
@@ -228,6 +229,17 @@ $(function () {
                 url: "/home/news",
                 data: newsList[index]
             }).then(GetData_Refresh);
+        })
+
+        //07.edit
+        $(".editItem").click(function(){
+            var index = $(this).closest("div").parent().index(); //get index
+            currentIndex = index;
+            $("#titleTextBox").val(newsList[index].title);
+            $("#ymdTextBox").val(newsList[index].ymd);
+            $("#contentTextBox").val(newsList[index].content);
+
+            $("#newsModal").modal( { backdrop: "static" } );
         })
     }
     
@@ -243,7 +255,8 @@ $(function () {
     $("#okButton").click(function(){
         $("#newsModal").modal("hide");
         //new
-        let dataToServe = {
+        if(currentIndex < 0){
+            let dataToServe = {
             title: $("#titleTextBox").val(),
             ymd: $("#ymdTextBox").val(),
             content: $("#contentTextBox").val().trim()
@@ -259,6 +272,25 @@ $(function () {
             }).then(function(){
                 GetData_Refresh();
             })
+        }
+        else{
+            let dataToServe = {
+                newsId:newsList[currentIndex].newsId,
+                title: $("#titleTextBox").val(),
+                ymd: $("#ymdTextBox").val(),
+                content: $("#contentTextBox").val().trim()
+            }
+            console.log(dataToServe);
+            $.ajax({
+                type: "put",
+                url: "/home/news",
+                contentType: "application/json",
+                data: JSON.stringify(dataToServe)
+            }).then(function(){
+                GetData_Refresh();
+            })
+        }
+        
             
     })
 

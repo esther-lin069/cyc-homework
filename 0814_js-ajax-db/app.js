@@ -82,11 +82,12 @@ app.post("/home/news", function (request, response) {
 app.put("/home/news", function (request, response) {
 
 	connection.query(
-		"update news set title = ?, ymd = ? where newsId = " 
+		"update news set title = ?, ymd = ?,content = ? where newsId = " 
 		    + request.body.newsId, 
 			[
 				request.body.title, 
-				request.body.ymd
+				request.body.ymd,
+				request.body.content
 			]);
 	response.send("row updated.");
     
