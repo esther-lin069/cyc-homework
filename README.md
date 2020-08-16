@@ -40,7 +40,10 @@ content: create-db.txt ,sql_test.txt ,esther_cy-order-food_system.sql
 主要修改檔案: public(index), app.js <br>
 運用: node modules / mysql / jquery / ajax
 
-說明: 製作過程PDF.pdf
+說明: 製作過程PDF.pdf<br>
+
+![image](https://i.imgur.com/mcKC1oo.png)
+
 --------------------------
 *Esther*
 
