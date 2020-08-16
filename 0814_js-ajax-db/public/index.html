@@ -80,7 +80,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4>新增/修改</h4>
+                <h5>新增/修改</h5>
             </div>
             <div class="modal-body">
                 <form>
@@ -95,7 +95,7 @@
                                placeholder="請輸入標題" />
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group date" data-provide="datepicker">
                         <label for="ymdTextBox">
                             <span class="glyphicon glyphicon-time"></span>
                             日期
@@ -105,7 +105,7 @@
                                class="form-control"
                                placeholder="yyyy-mm-dd 例如: 2017-05-20">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group w-75">
                         <label for="contentBox">
                             <span class="glyphicon glyphicon-list-alt"></span>
                             內容
@@ -148,6 +148,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.toast.js"></script>
 
+
 <script>
 
 // 使用方式:
@@ -179,6 +180,8 @@ function showToast(heading, message) {
 <script>
 
 $(function () {
+
+    //$("#ymdTextBox").datepicker();
 
     //獲取元素參考並移除該參考元素
     var CPanel = $("#ex-panel").html();
@@ -242,6 +245,7 @@ $(function () {
             $("#newsModal").modal( { backdrop: "static" } );
         })
     }
+
     
     //03. add modal-box （右上角的＋）
     $("#newItem").click(function(){
@@ -250,6 +254,7 @@ $(function () {
     })
 
     var currentIndex = -1;
+
 
     //04. OK button
     $("#okButton").click(function(){
@@ -262,7 +267,7 @@ $(function () {
             content: $("#contentTextBox").val().trim()
             }
             console.log(JSON.stringify(dataToServe));
-            //05. post data 有問題還沒解決QQ
+            //05. post data
             $.ajax({
                 type: "post",
                 url: "/home/news",
@@ -273,6 +278,7 @@ $(function () {
                 GetData_Refresh();
             })
         }
+        //edit
         else{
             let dataToServe = {
                 newsId:newsList[currentIndex].newsId,
