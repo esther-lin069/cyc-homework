@@ -44,6 +44,18 @@ content: create-db.txt ,sql_test.txt ,esther_cy-order-food_system.sql
 
 ![image](https://i.imgur.com/mcKC1oo.png)
 
+***
+*week04*
+
+### 2020/8/18 cyc-homework :
+### sesstion登入機制
+
+content: Lab_Login ,Lab_Login_finished / index.php ,login.php ,secret.php <br>
+運用: php session / connect db
+
+說明:  實作session登入驗證 / 資料庫登入驗證
+預設帳號密碼: 123/1231 ,456/4567
+
 --------------------------
 *Esther*
 
