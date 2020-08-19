@@ -8,7 +8,7 @@ content: Lab_Login (session only) ,Lab_Login_finished (add db_connect)
 
 -index.php :選擇登入/登出 或 進入會員頁面<br>
 -login.php :在此實作登入登出功能<br>
--secret.php ：會員專屬頁面
+-secret.php :會員專屬頁面
 
 
 <br>
@@ -16,7 +16,7 @@ content: Lab_Login (session only) ,Lab_Login_finished (add db_connect)
 說明:  實作session登入驗證 / 資料庫登入驗證
 
 
-預設帳號密碼: 123/1231 ,456/4567
+預設帳號密碼(2組): 123/1231 ,456/4567
 
 
 <br>
