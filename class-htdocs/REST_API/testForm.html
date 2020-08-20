@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Lab</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.js"></script>
 </head>
 <body>
     <form method="post" action="/REST_API/api/products">
@@ -26,9 +26,10 @@
                 price: 10001,
                 quantity: 11
             };
+            console.log(productData);
             $.ajax({
                 type: "put",
-                url: "/api/products/1",
+                url: "/REST_API/api/products/1",
                 data: productData
             }).then(function (e) {
                 $("#putButton").val(e);
@@ -38,7 +39,7 @@
         $("#deleteButton").click(function () {
             $.ajax({
                 type: "delete",
-                url: "/api/products/3"
+                url: "/REST_API/api/products/3"
             }).then(function (e) {
                 $("#deleteButton").val(e);
             })
