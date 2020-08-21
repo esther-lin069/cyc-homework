@@ -3,7 +3,7 @@
 
 ### 2020/8/18 cyc-homework :sesstion登入機制
 
-content: Lab_Login (session only) ,Lab_Login_finished (add db_connect)
+content: Session_Login (session only) ,Session_Login_dbLink (add db_connect)
 
 
 -index.php :選擇登入/登出 或 進入會員頁面<br>
