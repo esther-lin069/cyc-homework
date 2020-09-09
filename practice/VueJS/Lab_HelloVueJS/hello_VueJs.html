@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>    <title>Lab</title>
+    <style>
+        body>div {
+            font-family: sans-serif;
+            font-size: 1.25em;
+            border: 1px solid gray;
+            padding: 20px;
+            margin: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app1">
+        <input v-model="message"><br>
+        {{message}}
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+
+    <div id="app2">
+        <span v-bind:title="message">
+            mouse here
+        </span>
+    </div>
+
+    <div id="app3">
+        <span v-if="seen">
+            Now you see me
+        </span>
+    </div>
+
+    <div id="app4">
+        <ol>
+            <li v-for="todoItem in todeList">
+                {{ todoItem.text}}
+            </li>
+        </ol>
+    </div>
+
+
+<script>
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            message: "Hello VueJs!"
+        },
+        methods: {
+            reverseMessage: function(){
+                this.message = this.message.split('').reverse().join('');
+            }
+        }
+    });
+
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'Time: ' + new Date(),
+        }
+    });
+
+    var app3 = new Vue({
+        el:'#app3',
+        data: {
+            seen: false
+        }
+    });
+
+    var app4 = new Vue({
+        el:'#app4',
+        data: {
+            todeList:[
+                {text: 'i01'},
+                {text: 'i02'},
+                {text: 'i03'}
+            ]
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <input v-model="work"/>
+        <button @click="handleSubmit">加入要做的清單</button>
+        <div>{{work}}</div>
+        <ol>
+            <todo-item v-for="(item,index) of list"
+            :key="index"
+            :content="item"
+            >
+            </todo-item>
+        </ol>
+    </div>
+
+
+    <script>
+
+        Vue.component('todo-item', {
+            props: ['content'],
+            template: '<li @click="handleClick">{{content}}</li>',
+            methods: {
+                handleClick: function() {
+                    alert('Todo項目被點到')
+                    console.log('todo thing.')
+                }
+            },
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                work: '',
+                list: []
+            },
+            methods: {
+                handleSubmit: function() {
+                    this.list.push(this.work)
+                    this.work = ''
+                }
+            },
+        })
+
+    </script>
+
+</body>
+
+</html>
